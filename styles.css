@@ -51,23 +51,148 @@
   opacity: 0.4;
 }
 
-/* Page Loader */
+/* ─── PREMIUM PAGE LOADER ─── */
 .page-loader {
   position: fixed;
   inset: 0;
-  background: var(--neo-black);
+  background: #0a0a0f;
   z-index: 100000;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  overflow: hidden;
 }
 
+/* Background animated orbs */
+.loader-orbs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.loader-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.loader-orb--1 {
+  width: 300px;
+  height: 300px;
+  background: rgba(59, 130, 246, 0.4);
+  top: -10%;
+  right: -5%;
+  animation: loaderOrbFloat 6s ease-in-out infinite;
+}
+
+.loader-orb--2 {
+  width: 250px;
+  height: 250px;
+  background: rgba(168, 85, 247, 0.35);
+  bottom: -10%;
+  left: -5%;
+  animation: loaderOrbFloat 8s ease-in-out infinite reverse;
+}
+
+.loader-orb--3 {
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 112, 166, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: loaderOrbPulse 4s ease-in-out infinite;
+}
+
+@keyframes loaderOrbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.15); }
+}
+
+@keyframes loaderOrbPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.5; }
+}
+
+/* Orbiting ring */
+.loader-ring {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  animation: loaderRingSpin 6s linear infinite;
+}
+
+.loader-ring-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neo-blue);
+  box-shadow: 0 0 12px var(--neo-blue), 0 0 24px rgba(59, 130, 246, 0.3);
+}
+
+.loader-ring-dot:nth-child(1) {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loader-ring-dot:nth-child(2) {
+  bottom: 20%;
+  right: -2px;
+  background: var(--neo-pink);
+  box-shadow: 0 0 12px var(--neo-pink), 0 0 24px rgba(255, 112, 166, 0.3);
+  width: 6px;
+  height: 6px;
+}
+
+.loader-ring-dot:nth-child(3) {
+  bottom: 20%;
+  left: -2px;
+  background: var(--neo-purple);
+  box-shadow: 0 0 12px var(--neo-purple), 0 0 24px rgba(168, 85, 247, 0.3);
+  width: 5px;
+  height: 5px;
+}
+
+@keyframes loaderRingSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Logo */
 .loader-logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.loader-logo-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--neo-blue);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.08);
+  animation: loaderIconPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+}
+
+@keyframes loaderIconPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(59, 130, 246, 0.15); }
+  50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(59, 130, 246, 0.3); }
 }
 
 .loader-text {
@@ -75,15 +200,56 @@
   font-size: 1.8rem;
   font-weight: 900;
   color: white;
-  letter-spacing: 8px;
+  letter-spacing: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.loader-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: loaderCharReveal 0.5s ease forwards;
+  animation-delay: calc(var(--i) * 0.08s + 0.3s);
+}
+
+.loader-dot-sep {
+  display: inline-block;
+  animation: loaderDotPulse 1.5s ease-in-out infinite;
+  animation-delay: 1s;
+  font-size: 2.2rem;
+  margin: 0 2px;
+}
+
+@keyframes loaderCharReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loaderDotPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+}
+
+/* Progress section */
+.loader-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 2;
 }
 
 .loader-bar {
-  width: 200px;
-  height: 4px;
-  background: rgba(255,255,255,0.1);
+  width: 220px;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
   border-radius: 4px;
   overflow: hidden;
+  position: relative;
 }
 
 .loader-bar-fill {
@@ -91,13 +257,33 @@
   width: 0%;
   background: linear-gradient(90deg, var(--neo-blue), var(--neo-pink), var(--neo-purple));
   border-radius: 4px;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+  transition: width 0.1s ease;
 }
 
 .loader-percent {
   font-family: 'JetBrains Mono', monospace;
-  color: rgba(255,255,255,0.4);
-  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
   font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.loader-status {
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  animation: loaderStatusPulse 2s ease-in-out infinite;
+}
+
+@keyframes loaderStatusPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
 }
 
 /* ─── MARQUEE / TECH TICKER ─── */

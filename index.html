@@ -190,47 +190,85 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        background: rgba(18, 18, 18, 0.97);
-        z-index: 9999;
+        height: 100dvh;
+        background: rgba(18, 18, 18, 0.98);
+        z-index: 10000;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 0.75rem;
         padding: 3rem 2rem;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
       }
 
       #mobile-menu.active {
         display: flex;
-        animation: menuFadeIn 0.35s ease;
+        opacity: 1;
+        visibility: visible;
       }
 
-      @keyframes menuFadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      /* Close button inside mobile menu */
+      .mobile-menu-close {
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10002;
+        transition: all 0.3s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .mobile-menu-close:hover,
+      .mobile-menu-close:active {
+        background: var(--neo-pink);
+        border-color: var(--neo-pink);
+        transform: rotate(90deg);
+      }
+
+      /* Decorative line inside mobile menu */
+      .mobile-menu-brand {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: white;
+        margin-bottom: 1.5rem;
+        letter-spacing: 4px;
+        opacity: 0.3;
       }
 
       #mobile-menu a {
         display: block;
         padding: 1rem 2rem;
         margin-bottom: 0.25rem;
-        border: 2px solid rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.1);
         text-decoration: none;
         color: white;
         font-family: "JetBrains Mono", monospace;
         font-weight: 700;
-        font-size: 1.2rem;
-        background: transparent;
+        font-size: 1.1rem;
+        background: rgba(255, 255, 255, 0.03);
         box-shadow: none;
-        transition: all 0.3s;
-        border-radius: 12px;
+        transition: all 0.3s ease;
+        border-radius: 14px;
         text-align: center;
         width: 100%;
         max-width: 320px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
       }
 
       #mobile-menu a:hover,
@@ -238,6 +276,28 @@
         background: var(--neo-blue);
         border-color: var(--neo-blue);
         transform: scale(1.03);
+      }
+
+      /* Staggered entrance for mobile menu links */
+      #mobile-menu.active a {
+        animation: menuItemSlideIn 0.4s ease forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      #mobile-menu.active a:nth-child(1) { animation-delay: 0.05s; }
+      #mobile-menu.active a:nth-child(2) { animation-delay: 0.1s; }
+      #mobile-menu.active a:nth-child(3) { animation-delay: 0.15s; }
+      #mobile-menu.active a:nth-child(4) { animation-delay: 0.2s; }
+      #mobile-menu.active a:nth-child(5) { animation-delay: 0.25s; }
+      #mobile-menu.active a:nth-child(6) { animation-delay: 0.3s; }
+      #mobile-menu.active a:nth-child(7) { animation-delay: 0.35s; }
+
+      @keyframes menuItemSlideIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .mobile-menu-btn {
@@ -254,6 +314,10 @@
         border-radius: 6px;
         z-index: 10001;
         position: relative;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        min-width: 44px;
+        min-height: 44px;
       }
 
       .mobile-menu-btn:active {
@@ -1738,13 +1802,40 @@
     </style>
   </head>
   <body>
-    <!-- Page Loader -->
+    <!-- Premium Page Loader -->
     <div class="page-loader">
-      <div class="loader-logo">
-        <div class="loader-text">AJNISH<span class="loader-dot" style="color:var(--neo-blue)">.</span>DEV</div>
+      <!-- Animated background orbs -->
+      <div class="loader-orbs">
+        <div class="loader-orb loader-orb--1"></div>
+        <div class="loader-orb loader-orb--2"></div>
+        <div class="loader-orb loader-orb--3"></div>
       </div>
-      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
-      <div class="loader-percent">0%</div>
+
+      <!-- Orbiting ring -->
+      <div class="loader-ring">
+        <div class="loader-ring-dot"></div>
+        <div class="loader-ring-dot"></div>
+        <div class="loader-ring-dot"></div>
+      </div>
+
+      <!-- Logo reveal -->
+      <div class="loader-logo">
+        <div class="loader-logo-icon">
+          <i class="ri-code-s-slash-line"></i>
+        </div>
+        <div class="loader-text">
+          <span class="loader-char" style="--i:0">A</span><span class="loader-char" style="--i:1">J</span><span class="loader-char" style="--i:2">N</span><span class="loader-char" style="--i:3">I</span><span class="loader-char" style="--i:4">S</span><span class="loader-char" style="--i:5">H</span><span class="loader-dot-sep" style="color:var(--neo-blue)">.</span><span class="loader-char" style="--i:6">D</span><span class="loader-char" style="--i:7">E</span><span class="loader-char" style="--i:8">V</span>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="loader-progress">
+        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-percent">0%</div>
+      </div>
+
+      <!-- Loading message -->
+      <div class="loader-status">Preparing your experience...</div>
     </div>
 
     <!-- Custom Cursor -->
@@ -1772,19 +1863,25 @@
           <a href="#certifications" class="nav-link">CERTIFICATIONS</a>
           <a href="#contact" class="nav-link">CONTACT</a>
         </div>
-        <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open menu">
           <i class="ri-menu-line"></i>
         </button>
       </div>
-      <div id="mobile-menu">
-        <a href="#about">ABOUT</a>
-        <a href="#education">EDUCATION</a>
-        <a href="#skills">SKILLS</a>
-        <a href="#projects">PROJECTS</a>
-        <a href="#certifications">CERTIFICATIONS</a>
-        <a href="#contact">CONTACT</a>
-      </div>
     </nav>
+
+    <!-- Mobile Menu (Outside nav to prevent scroll-hide issues) -->
+    <div id="mobile-menu">
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+        <i class="ri-close-line"></i>
+      </button>
+      <div class="mobile-menu-brand">AJNISH.DEV</div>
+      <a href="#about"><i class="ri-user-line" style="margin-right:0.5rem"></i> ABOUT</a>
+      <a href="#education"><i class="ri-graduation-cap-line" style="margin-right:0.5rem"></i> EDUCATION</a>
+      <a href="#skills"><i class="ri-tools-line" style="margin-right:0.5rem"></i> SKILLS</a>
+      <a href="#projects"><i class="ri-code-box-line" style="margin-right:0.5rem"></i> PROJECTS</a>
+      <a href="#certifications"><i class="ri-award-line" style="margin-right:0.5rem"></i> CERTIFICATIONS</a>
+      <a href="#contact"><i class="ri-mail-line" style="margin-right:0.5rem"></i> CONTACT</a>
+    </div>
 
     <!-- Hero -->
     <section class="hero">

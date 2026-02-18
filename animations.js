@@ -7,20 +7,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const isMobile = window.innerWidth <= 768;
 
-  // ─── PAGE LOADER WITH COUNTER ───
+  // ─── PREMIUM PAGE LOADER ───
   const loader = document.querySelector('.page-loader');
   if (loader) {
     const loaderTl = gsap.timeline();
     const pctEl = loader.querySelector('.loader-percent');
+    const statusEl = loader.querySelector('.loader-status');
+    const statusMessages = ['Loading assets...', 'Initializing components...', 'Almost ready...', 'Welcome!'];
+    let msgIdx = 0;
+
     loaderTl
+      // Icon entrance
+      .from('.loader-logo-icon', { scale: 0, rotation: -180, duration: 0.6, ease: 'back.out(2)' }, 0.2)
+      .from('.loader-ring', { scale: 0, opacity: 0, duration: 0.5, ease: 'power2.out' }, 0.3)
+      // Progress bar fill
       .to('.loader-bar-fill', {
-        width: '100%', duration: 1.4, ease: 'power2.inOut',
+        width: '100%', duration: 2, ease: 'power1.inOut',
         onUpdate: function () {
-          if (pctEl) pctEl.textContent = Math.round(this.progress() * 100) + '%';
+          const pct = Math.round(this.progress() * 100);
+          if (pctEl) pctEl.textContent = pct + '%';
+          // Update status message at thresholds
+          const newIdx = pct < 30 ? 0 : pct < 60 ? 1 : pct < 90 ? 2 : 3;
+          if (statusEl && newIdx !== msgIdx) {
+            msgIdx = newIdx;
+            gsap.to(statusEl, { opacity: 0, duration: 0.15, onComplete: () => {
+              statusEl.textContent = statusMessages[msgIdx];
+              gsap.to(statusEl, { opacity: 1, duration: 0.15 });
+            }});
+          }
         }
-      })
-      .to('.loader-text', { y: -15, opacity: 0, duration: 0.3 }, '-=0.2')
-      .to(loader, { yPercent: -100, duration: 0.7, ease: 'power4.inOut' })
+      }, 0.6)
+      // Exit sequence
+      .to('.loader-logo-icon', { scale: 1.3, opacity: 0, duration: 0.3, ease: 'power2.in' })
+      .to('.loader-text', { y: -20, opacity: 0, duration: 0.3, ease: 'power2.in' }, '-=0.25')
+      .to('.loader-ring', { scale: 1.5, opacity: 0, duration: 0.3 }, '-=0.25')
+      .to('.loader-progress', { y: 10, opacity: 0, duration: 0.2 }, '-=0.2')
+      .to('.loader-status', { opacity: 0, duration: 0.15 }, '-=0.15')
+      .to('.loader-orb', { scale: 2, opacity: 0, duration: 0.4 }, '-=0.3')
+      .to(loader, { opacity: 0, duration: 0.4, ease: 'power2.inOut' })
       .set(loader, { display: 'none' });
   }
 
@@ -366,6 +390,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ─── SMOOTH SCROLLING ───
+  // Helper to close mobile menu
+  function closeMobileMenu() {
+    const mm = document.getElementById('mobile-menu');
+    if (mm && mm.classList.contains('active')) {
+      mm.classList.remove('active');
+      const icon = document.getElementById('mobile-menu-btn').querySelector('i');
+      if (icon) icon.classList.replace('ri-close-line', 'ri-menu-line');
+      document.body.style.overflow = '';
+    }
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
@@ -373,14 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetId === '#') return;
       const target = document.querySelector(targetId);
       if (target) {
-        // Close mobile menu if open
-        const mm = document.getElementById('mobile-menu');
-        if (mm.classList.contains('active')) {
-          mm.classList.remove('active');
-          const icon = document.getElementById('mobile-menu-btn').querySelector('i');
-          icon.classList.replace('ri-close-line', 'ri-menu-line');
-          document.body.style.overflow = '';
-        }
+        closeMobileMenu();
         gsap.to(window, { scrollTo: { y: target, offsetY: 80 }, duration: 1, ease: 'power3.inOut' });
       }
     });
@@ -408,16 +436,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── MOBILE MENU ───
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('active');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+  function openMobileMenu() {
+    mobileMenu.classList.add('active');
     const icon = mobileMenuBtn.querySelector('i');
+    if (icon) icon.classList.replace('ri-menu-line', 'ri-close-line');
+    document.body.style.overflow = 'hidden';
+  }
+
+  mobileMenuBtn.addEventListener('click', () => {
     if (mobileMenu.classList.contains('active')) {
-      icon.classList.replace('ri-menu-line', 'ri-close-line');
-      document.body.style.overflow = 'hidden';
-      gsap.from('#mobile-menu a', { y: 30, opacity: 0, stagger: 0.07, duration: 0.4, ease: 'back.out(1.5)' });
+      closeMobileMenu();
     } else {
-      icon.classList.replace('ri-close-line', 'ri-menu-line');
-      document.body.style.overflow = '';
+      openMobileMenu();
+    }
+  });
+
+  // Close button inside the mobile menu
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+  }
+
+  // Close menu when tapping on the overlay area (outside links)
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      closeMobileMenu();
     }
   });
 
