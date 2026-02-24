@@ -892,7 +892,7 @@ section {
   font-weight: 500;
 }
 
-/* ENHANCED ABOUT SECTION */
+/*  ABOUT SECTION */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1283,7 +1283,7 @@ section {
   box-shadow: 4px 4px 0px 0px var(--shadow-color);
 }
 
-/* ENHANCED PROJECTS SECTION */
+/* PROJECTS SECTION */
 .projects-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -3784,7 +3784,15 @@ nav {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--neo-blue), var(--neo-pink), var(--neo-purple), var(--neo-green), var(--neo-yellow), var(--neo-blue));
+  background: linear-gradient(
+    135deg,
+    var(--neo-blue),
+    var(--neo-pink),
+    var(--neo-purple),
+    var(--neo-green),
+    var(--neo-yellow),
+    var(--neo-blue)
+  );
   background-size: 400% 400%;
   animation: avatarRingRotate 4s linear infinite;
   z-index: 0;
@@ -3810,7 +3818,12 @@ nav {
   font-family: "JetBrains Mono", monospace;
   font-size: 3.5rem;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--neo-blue), var(--neo-pink), var(--neo-purple));
+  background: linear-gradient(
+    135deg,
+    var(--neo-blue),
+    var(--neo-pink),
+    var(--neo-purple)
+  );
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -3843,21 +3856,41 @@ nav {
 }
 
 @keyframes avatarRingRotate {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes avatarTextShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes avatarStatusPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(51, 255, 87, 0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(51, 255, 87, 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(51, 255, 87, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(51, 255, 87, 0);
+  }
 }
 
 /* Hover lift on avatar */
@@ -3928,10 +3961,6 @@ nav {
     font-size: 1.6rem;
   }
 }
-
-/* ============================================
-   PERFORMANCE CSS HINTS
-   ============================================ */
 
 /* GPU compositing for animated elements */
 .hero-orb,
