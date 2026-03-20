@@ -179,26 +179,26 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
   }
 
-  // ─── HERO CINEMATIC ENTRANCE ───
+  // ─── HERO CINEMATIC ENTRANCE (Premium 3D GSAP) ───
   const heroDelay = isMobile ? 1.0 : 1.6;
   const heroTl = gsap.timeline({ delay: heroDelay });
 
   // Orbs fade in softly
   heroTl
-    .from('.hero-orb', { opacity: 0, scale: 0.3, duration: 1.2, stagger: 0.15, ease: 'power2.out' })
-    .from('.hero-grid-pattern', { opacity: 0, duration: 0.8 }, '-=0.8')
-    .from('.hero-badge', { y: 25, opacity: 0, scale: 0.9, duration: 0.6, ease: 'back.out(2)' }, '-=0.6')
-    .from('.hero-title > div:first-child', { y: 50, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.25')
-    .from('.gradient-text', { y: 60, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out' }, '-=0.25')
-    .from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-    .from('.hero-social-strip a', { y: 20, opacity: 0, scale: 0.7, duration: 0.4, stagger: 0.08, ease: 'back.out(2)' }, '-=0.3')
-    .from('.hero-social-divider', { width: 0, opacity: 0, duration: 0.4 }, '-=0.1')
-    .from('.hero-buttons .btn', { y: 25, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'back.out(1.5)' }, '-=0.3')
-    .from('.hero-terminal', { y: 40, opacity: 0, scale: 0.95, duration: 0.7, ease: 'power3.out' }, '-=0.3')
-    .from('.terminal-line', { x: -15, opacity: 0, duration: 0.3, stagger: 0.06, ease: 'power2.out' }, '-=0.3')
-    .from('.stat-card', { y: 35, opacity: 0, scale: 0.85, duration: 0.5, stagger: 0.08, ease: 'back.out(2)' }, '-=0.2')
-    .from('.availability-badge', { y: 20, opacity: 0, duration: 0.4, ease: 'power2.out' }, '-=0.2')
-    .from('.scroll-indicator', { y: 15, opacity: 0, duration: 0.35 }, '-=0.1');
+    .from('.hero-orb', { opacity: 0, scale: 0, rotation: 45, duration: 1.5, stagger: 0.15, ease: 'elastic.out(1, 0.5)' })
+    .from('.hero-grid-pattern', { opacity: 0, duration: 1.2 }, '-=1.2')
+    .from('.hero-badge', { y: -40, opacity: 0, scale: 0.8, rotationX: 45, duration: 0.8, ease: 'back.out(2)' }, '-=0.8')
+    .from('.hero-title > div:first-child', { y: 60, opacity: 0, rotationX: -30, transformOrigin: "50% 100%", duration: 0.8, ease: 'power4.out' }, '-=0.4')
+    .from('.gradient-text', { y: 60, opacity: 0, rotationX: -30, transformOrigin: "50% 100%", duration: 0.8, ease: 'power4.out' }, '-=0.6')
+    .from('.hero-subtitle', { y: 40, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+    .from('.hero-social-strip a', { y: 30, opacity: 0, scale: 0.5, rotation: -45, duration: 0.6, stagger: 0.1, ease: 'back.out(2.5)' }, '-=0.4')
+    .from('.hero-social-divider', { scaleX: 0, transformOrigin: 'left center', opacity: 0, duration: 0.6 }, '-=0.3')
+    .from('.hero-buttons .btn', { y: 30, opacity: 0, scale: 0.9, duration: 0.6, stagger: 0.15, ease: 'back.out(1.5)' }, '-=0.4')
+    .from('.hero-terminal', { y: 50, opacity: 0, scale: 0.9, rotationX: -15, transformPerspective: 1000, duration: 0.9, ease: 'power3.out' }, '-=0.5')
+    .from('.terminal-line', { x: -25, opacity: 0, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, '-=0.4')
+    .from('.stat-card', { y: 50, opacity: 0, scale: 0.8, rotationY: 45, transformPerspective: 1000, duration: 0.7, stagger: 0.1, ease: 'back.out(1.8)' }, '-=0.3')
+    .from('.availability-badge', { y: 25, opacity: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+    .from('.scroll-indicator', { y: -20, opacity: 0, duration: 0.5, ease: 'bounce.out' }, '-=0.2');
 
   // ─── MARQUEE ANIMATION (GSAP-powered for smoothness) ───
   const marqueeTrack = document.querySelector('.marquee-track');
@@ -207,46 +207,48 @@ document.addEventListener('DOMContentLoaded', () => {
     marqueeTrack.innerHTML += marqueeTrack.innerHTML;
   }
 
-  // ─── SCROLL-TRIGGERED REVEALS ───
+  // ─── PREMIUM SCROLL-TRIGGERED 3D REVEALS ───
   const revealConfig = (trigger, props) => ({
-    scrollTrigger: { trigger, start: isMobile ? 'top 92%' : 'top 85%', toggleActions: 'play none none none' },
+    scrollTrigger: { trigger, start: isMobile ? 'top 92%' : 'top 85%', toggleActions: 'play none none reverse' },
     ...props
   });
 
   gsap.utils.toArray('.section-header').forEach(el => {
-    gsap.from(el, revealConfig(el, { y: 40, opacity: 0, scale: 0.92, duration: 0.7, ease: 'back.out(1.5)' }));
+    gsap.from(el, revealConfig(el, { y: 60, opacity: 0, scale: 0.85, rotationX: -20, transformPerspective: 800, duration: 0.9, ease: 'back.out(1.5)' }));
   });
 
   gsap.utils.toArray('.section-subtitle').forEach(el => {
-    gsap.from(el, revealConfig(el, { y: 25, opacity: 0, duration: 0.5, ease: 'power3.out', delay: 0.15 }));
+    gsap.from(el, revealConfig(el, { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out', delay: 0.15 }));
   });
 
-  // About cards
+  // About cards with 3D flip effect
   gsap.utils.toArray('.about-grid .card').forEach((card, i) => {
     gsap.from(card, revealConfig(card, {
-      x: isMobile ? 0 : (i % 2 === 0 ? -50 : 50),
-      y: isMobile ? 40 : 0,
-      opacity: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.12
+      x: isMobile ? 0 : (i % 2 === 0 ? -80 : 80),
+      y: isMobile ? 50 : 0,
+      rotationY: isMobile ? 0 : (i % 2 === 0 ? -15 : 15),
+      transformPerspective: 1000,
+      opacity: 0, duration: 0.9, ease: 'power4.out', delay: i * 0.15
     }));
   });
 
-  // Education
+  // Education with slide and bloom
   gsap.utils.toArray('.education-item').forEach((item, i) => {
     gsap.from(item, revealConfig(item, {
-      x: isMobile ? 0 : -60,
-      y: isMobile ? 40 : 0,
-      opacity: 0, duration: 0.8, ease: 'power3.out', delay: i * 0.15
+      x: isMobile ? 0 : -80,
+      y: isMobile ? 50 : 0,
+      opacity: 0, scale: 0.95, duration: 0.9, ease: 'back.out(1.2)', delay: i * 0.2
     }));
   });
 
   // Skills
   gsap.utils.toArray('.skills-grid .card').forEach((card, i) => {
     gsap.from(card, revealConfig(card, {
-      y: 50, opacity: 0, scale: 0.92, duration: 0.6, ease: 'back.out(1.5)', delay: i * 0.08
+      y: 60, opacity: 0, scale: 0.9, duration: 0.7, ease: 'back.out(1.2)', delay: i * 0.1
     }));
   });
 
-  // Progress bars
+  // Progress bars (more elastic)
   document.querySelectorAll('.progress-fill').forEach(bar => {
     const w = bar.getAttribute('data-width');
     bar.style.width = '0';
@@ -561,34 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── FORM SUBMISSION WITH ANIMATION ───
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
-      const original = btn.innerHTML;
-
-      // Success animation
-      btn.innerHTML = '<i class="ri-check-double-line"></i> SENT SUCCESSFULLY!';
-      btn.style.background = 'var(--neo-green)';
-      btn.style.color = 'var(--neo-black)';
-      gsap.fromTo(btn, { scale: 0.9 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' });
-
-      // Confetti-like effect on form inputs
-      gsap.to('.form-control', { y: -5, opacity: 0, stagger: 0.05, duration: 0.3, ease: 'power2.in',
-        onComplete: () => {
-          setTimeout(() => {
-            gsap.to('.form-control', { y: 0, opacity: 1, stagger: 0.05, duration: 0.3, ease: 'power2.out' });
-            btn.innerHTML = original;
-            btn.style.background = '';
-            btn.style.color = '';
-            this.reset();
-          }, 2500);
-        }
-      });
-    });
-  }
+  // ─── FORM SUBMISSION — handled by EmailJS section below ───
 
   // ─── TOUCH FEEDBACK FOR MOBILE ───
   if (isMobile) {
@@ -1017,4 +992,276 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ═══════════════════════════════════════════
+  //  JOURNEY TIMELINE ANIMATIONS
+  // ═══════════════════════════════════════════
+  gsap.utils.toArray('.journey-milestone').forEach((m, i) => {
+    gsap.from(m, revealConfig(m, {
+      y: 50, opacity: 0, scale: 0.85, duration: 0.6, ease: 'back.out(1.5)', delay: i * 0.1
+    }));
+  });
+
+  // ═══════════════════════════════════════════
+  //  CURRENTLY LEARNING — SVG RING ANIMATION
+  // ═══════════════════════════════════════════
+  gsap.utils.toArray('.learning-card').forEach((card, i) => {
+    gsap.from(card, revealConfig(card, {
+      y: 50, opacity: 0, scale: 0.9, duration: 0.6, ease: 'back.out(1.5)', delay: i * 0.1
+    }));
+  });
+
+  document.querySelectorAll('.ring-progress').forEach(ring => {
+    const progress = parseInt(ring.getAttribute('data-progress') || '0');
+    const circumference = 2 * Math.PI * 52; // r=52
+    const offset = circumference - (circumference * progress / 100);
+
+    ScrollTrigger.create({
+      trigger: ring,
+      start: isMobile ? 'top 95%' : 'top 85%',
+      onEnter: () => {
+        ring.style.strokeDashoffset = offset;
+      }
+    });
+  });
+
+  // ═══════════════════════════════════════════
+  //  FUN FACTS COUNTER ANIMATION
+  // ═══════════════════════════════════════════
+  document.querySelectorAll('.fun-fact-value').forEach(el => {
+    const target = parseInt(el.getAttribute('data-target') || '0');
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 92%',
+      onEnter: () => {
+        gsap.to({ v: 0 }, {
+          v: target, duration: 2.5, ease: 'power2.out',
+          onUpdate: function() {
+            el.textContent = Math.floor(this.targets()[0].v);
+          }
+        });
+      }
+    });
+  });
+
+  // Fun facts entrance
+  gsap.utils.toArray('.fun-fact-item').forEach((item, i) => {
+    gsap.from(item, revealConfig(item, {
+      y: 30, opacity: 0, scale: 0.85, duration: 0.5, ease: 'back.out(2)', delay: i * 0.08
+    }));
+  });
+
+  // ═══════════════════════════════════════════
+  //  ACTIVITY HEATMAP
+  // ═══════════════════════════════════════════
+  const heatmapGrid = document.getElementById('heatmap-grid');
+  const heatmapMonths = document.getElementById('heatmap-months');
+  const heatmapTooltip = document.getElementById('heatmap-tooltip');
+  const heatmapTotal = document.getElementById('heatmap-total');
+  const heatmapStreak = document.getElementById('heatmap-streak');
+  const heatmapBest = document.getElementById('heatmap-best');
+
+  if (heatmapGrid) {
+    // Generate 26 weeks (roughly 6 months) of data
+    const WEEKS = 26;
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(startDate.getDate() - (WEEKS * 7));
+
+    // Simple seeded random for consistent data
+    let seed = 42;
+    function seededRandom() {
+      seed = (seed * 16807 + 0) % 2147483647;
+      return (seed - 1) / 2147483646;
+    }
+
+    const heatmapColors = [
+      'var(--heatmap-0)',
+      'var(--heatmap-1)',
+      'var(--heatmap-2)',
+      'var(--heatmap-3)',
+      'var(--heatmap-4)'
+    ];
+
+    let totalContributions = 0;
+    let currentStreak = 0;
+    let bestDay = 0;
+    let streakCounting = true;
+    const allData = [];
+
+    // Generate data for all days
+    for (let w = 0; w < WEEKS; w++) {
+      for (let d = 0; d < 7; d++) {
+        const date = new Date(startDate);
+        date.setDate(date.getDate() + w * 7 + d);
+
+        if (date > today) {
+          allData.push({ date, count: -1 }); // future
+          continue;
+        }
+
+        // Weighted random - more active on weekdays, occasional rest days
+        const dayOfWeek = date.getDay();
+        let r = seededRandom();
+        let count;
+
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          // Weekend: 40% chance of no activity
+          count = r < 0.4 ? 0 : Math.floor(r * 8);
+        } else {
+          // Weekday: 15% chance of no activity
+          count = r < 0.15 ? 0 : Math.floor(r * 12) + 1;
+        }
+
+        totalContributions += count;
+        if (count > bestDay) bestDay = count;
+        allData.push({ date, count });
+      }
+    }
+
+    // Calculate streak from the end
+    for (let i = allData.length - 1; i >= 0; i--) {
+      if (allData[i].count < 0) continue; // skip future
+      if (allData[i].count > 0 && streakCounting) {
+        currentStreak++;
+      } else if (allData[i].count === 0) {
+        streakCounting = false;
+      }
+    }
+
+    // Build grid
+    allData.forEach(({ date, count }) => {
+      const cell = document.createElement('div');
+      cell.className = 'heatmap-cell';
+
+      if (count < 0) {
+        cell.style.background = 'transparent';
+        cell.style.cursor = 'default';
+      } else {
+        const level = count === 0 ? 0 : count <= 2 ? 1 : count <= 5 ? 2 : count <= 8 ? 3 : 4;
+        cell.style.background = heatmapColors[level];
+        cell.setAttribute('data-date', date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }));
+        cell.setAttribute('data-count', count);
+
+        // Tooltip
+        cell.addEventListener('mouseenter', (e) => {
+          const d = cell.getAttribute('data-date');
+          const c = cell.getAttribute('data-count');
+          heatmapTooltip.textContent = `${c} contribution${c !== '1' ? 's' : ''} on ${d}`;
+          heatmapTooltip.classList.add('visible');
+        });
+
+        cell.addEventListener('mousemove', (e) => {
+          heatmapTooltip.style.left = (e.clientX + 12) + 'px';
+          heatmapTooltip.style.top = (e.clientY - 40) + 'px';
+        });
+
+        cell.addEventListener('mouseleave', () => {
+          heatmapTooltip.classList.remove('visible');
+        });
+      }
+
+      heatmapGrid.appendChild(cell);
+    });
+
+    // Month labels
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let lastMonth = -1;
+    for (let w = 0; w < WEEKS; w++) {
+      const date = new Date(startDate);
+      date.setDate(date.getDate() + w * 7);
+      const m = date.getMonth();
+      if (m !== lastMonth) {
+        const label = document.createElement('span');
+        label.className = 'heatmap-month-label';
+        label.textContent = monthNames[m];
+        label.style.width = '17px'; // cell + gap
+        heatmapMonths.appendChild(label);
+        lastMonth = m;
+      }
+    }
+
+    // Animate stats
+    ScrollTrigger.create({
+      trigger: heatmapGrid,
+      start: 'top 85%',
+      onEnter: () => {
+        gsap.to({ v: 0 }, { v: totalContributions, duration: 2, ease: 'power2.out', onUpdate: function() { heatmapTotal.textContent = Math.floor(this.targets()[0].v); }});
+        gsap.to({ v: 0 }, { v: currentStreak, duration: 1.5, ease: 'power2.out', onUpdate: function() { heatmapStreak.textContent = Math.floor(this.targets()[0].v); }});
+        gsap.to({ v: 0 }, { v: bestDay, duration: 1.5, ease: 'power2.out', onUpdate: function() { heatmapBest.textContent = Math.floor(this.targets()[0].v); }});
+      }
+    });
+
+    // Heatmap entrance animation
+    gsap.from('.heatmap-wrapper', revealConfig('.heatmap-wrapper', {
+      y: 50, opacity: 0, duration: 0.8, ease: 'power3.out'
+    }));
+  }
+
+  // ═══════════════════════════════════════════
+  //  ENHANCED CONTACT FORM (with EmailJS ready)
+  // ═══════════════════════════════════════════
+  const emailForm = document.getElementById('contactForm');
+  if (emailForm) {
+    // Initialize EmailJS with your Public Key object for v4 compatibility
+    emailjs.init({
+      publicKey: '82GOVgsFByyas4wU9',
+    });
+
+    emailForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const original = btn.innerHTML;
+
+      // Show sending state
+      btn.innerHTML = '<i class="ri-loader-4-line" style="animation: rotate 0.8s linear infinite"></i> SENDING...';
+      btn.style.background = 'var(--neo-blue)';
+      btn.style.color = 'white';
+      btn.disabled = true;
+
+      // Prepare template parameters using the form data
+      const templateParams = {
+        name: this.elements['name'].value,
+        email: this.elements['email'].value,
+        subject: this.elements['subject'].value,
+        message: this.elements['message'].value
+      };
+
+      // Send via EmailJS using the service ID and a generic template ID
+      emailjs.send('service_amzknqu', 'template_z5nsqvc', templateParams)
+        .then(() => {
+          // Success animation
+          btn.innerHTML = '<i class="ri-check-double-line"></i> SENT SUCCESSFULLY!';
+          btn.style.background = 'var(--neo-green)';
+          btn.style.color = 'var(--neo-black)';
+          gsap.fromTo(btn, { scale: 0.9 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' });
+
+          // Confetti-like effect on form inputs
+          gsap.to('.form-control', { y: -5, opacity: 0, stagger: 0.05, duration: 0.3, ease: 'power2.in',
+            onComplete: () => {
+              setTimeout(() => {
+                gsap.to('.form-control', { y: 0, opacity: 1, stagger: 0.05, duration: 0.3, ease: 'power2.out' });
+                btn.innerHTML = original;
+                btn.style.background = '';
+                btn.style.color = '';
+                btn.disabled = false;
+                emailForm.reset();
+              }, 2500);
+            }
+          });
+        }, (error) => {
+          console.error("EmailJS Error:", error);
+          btn.innerHTML = '<i class="ri-error-warning-line"></i> FAILED TO SEND';
+          btn.style.background = 'var(--neo-pink)'; // Using theme error red/pink
+
+          setTimeout(() => {
+            btn.innerHTML = original;
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.disabled = false;
+          }, 3000);
+        });
+    });
+  }
+
 });
+

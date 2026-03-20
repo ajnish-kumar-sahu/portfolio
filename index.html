@@ -12,6 +12,19 @@
       content="Ajnish Kumar - BCA Student & Full-Stack Developer. Skilled in React.js, JavaScript, C++, Node.js. View my projects and get in touch."
     />
     <meta name="theme-color" content="#3b82f6" />
+    <meta name="keywords" content="Ajnish Kumar, Full-Stack Developer, React.js, BCA Student, Web Developer, Portfolio, Software Engineer" />
+    <meta name="author" content="Ajnish Kumar" />
+    
+    <!-- Open Graph / Premium SEO -->
+    <meta property="og:title" content="Ajnish Kumar | Full-Stack Developer Portfolio" />
+    <meta property="og:description" content="Ajnish Kumar - BCA Student & Full-Stack Developer. Skilled in React.js, JavaScript, C++, Node.js. View my projects and get in touch." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ajnish.in/" />
+    <meta property="og:image" content="profile.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ajnish Kumar | Full-Stack Developer Portfolio" />
+    <meta name="twitter:description" content="Ajnish Kumar - BCA Student & Full-Stack Developer. Skilled in React.js, JavaScript, C++, Node.js. View my projects and get in touch." />
+    <meta name="twitter:image" content="profile.jpg" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,6 +42,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- Matter.js (2D Physics Engine for Antigravity) — deferred for performance -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
@@ -80,6 +96,9 @@
       <!-- Loading message -->
       <div class="loader-status">Preparing your experience...</div>
     </div>
+
+    <!-- Premium Noise Overlay -->
+    <div class="noise-overlay"></div>
 
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
@@ -571,6 +590,82 @@
       </div>
     </section>
 
+    <!-- Journey Timeline -->
+    <section id="journey" style="background: linear-gradient(135deg, var(--neo-blue) 0%, var(--neo-green) 100%); padding: 5rem 1.5rem;">
+      <div class="container">
+        <h2 class="section-header" style="color: white">
+          <span style="background: white; color: black">MY JOURNEY</span>
+        </h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9)">Key milestones in my developer story</p>
+        <div class="journey-timeline">
+          <div class="journey-track">
+            <div class="journey-line"></div>
+
+            <div class="journey-milestone">
+              <div class="milestone-dot" style="background: var(--neo-yellow)"></div>
+              <div class="milestone-card">
+                <div class="milestone-date">2020</div>
+                <div class="milestone-icon"><i class="ri-terminal-box-line"></i></div>
+                <h4 class="milestone-title">Started Coding</h4>
+                <p class="milestone-desc">Wrote my first "Hello World" in C and fell in love with programming</p>
+              </div>
+            </div>
+
+            <div class="journey-milestone">
+              <div class="milestone-dot" style="background: var(--neo-pink)"></div>
+              <div class="milestone-card">
+                <div class="milestone-date">2021</div>
+                <div class="milestone-icon"><i class="ri-html5-line"></i></div>
+                <h4 class="milestone-title">Web Development</h4>
+                <p class="milestone-desc">Discovered HTML, CSS & JavaScript — built my first website</p>
+              </div>
+            </div>
+
+            <div class="journey-milestone">
+              <div class="milestone-dot" style="background: var(--neo-blue)"></div>
+              <div class="milestone-card">
+                <div class="milestone-date">2022</div>
+                <div class="milestone-icon"><i class="ri-code-s-slash-line"></i></div>
+                <h4 class="milestone-title">DSA & C++</h4>
+                <p class="milestone-desc">Dived deep into Data Structures & Algorithms using C++</p>
+              </div>
+            </div>
+
+            <div class="journey-milestone">
+              <div class="milestone-dot" style="background: var(--neo-green)"></div>
+              <div class="milestone-card">
+                <div class="milestone-date">2023</div>
+                <div class="milestone-icon"><i class="ri-graduation-cap-line"></i></div>
+                <h4 class="milestone-title">BCA at VBU</h4>
+                <p class="milestone-desc">Started Bachelor of Computer Applications at Vinoba Bhave University</p>
+              </div>
+            </div>
+
+            <div class="journey-milestone">
+              <div class="milestone-dot" style="background: var(--neo-purple)"></div>
+              <div class="milestone-card">
+                <div class="milestone-date">2024</div>
+                <div class="milestone-icon"><i class="ri-reactjs-line"></i></div>
+                <h4 class="milestone-title">React.js & Projects</h4>
+                <p class="milestone-desc">Mastered React, built real-world projects, earned certifications</p>
+              </div>
+            </div>
+
+            <div class="journey-milestone">
+              <div class="milestone-dot" style="background: var(--neo-orange)"></div>
+              <div class="milestone-card">
+                <div class="milestone-date">2025</div>
+                <div class="milestone-icon"><i class="ri-rocket-line"></i></div>
+                <h4 class="milestone-title">Full-Stack Goals</h4>
+                <p class="milestone-desc">Learning Node.js, MongoDB & building full-stack applications</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!--Skills -->
     <section
       id="skills"
@@ -832,6 +927,71 @@
       </div>
     </section>
 
+    <!-- Currently Learning -->
+    <section id="learning" style="padding: 5rem 1.5rem;">
+      <div class="container">
+        <h2 class="section-header">
+          <span style="background: var(--neo-orange); color: black">CURRENTLY LEARNING</span>
+        </h2>
+        <p class="section-subtitle">Technologies I'm actively exploring</p>
+        <div class="learning-grid">
+
+          <div class="learning-card">
+            <div class="learning-ring-wrapper">
+              <svg class="learning-ring" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                <circle class="ring-progress" cx="60" cy="60" r="52" data-progress="40" style="stroke: var(--neo-blue)"/>
+              </svg>
+              <div class="ring-label">40%</div>
+            </div>
+            <h4 class="learning-title">TypeScript</h4>
+            <p class="learning-desc">Type-safe JavaScript for scalable applications</p>
+            <div class="learning-status"><span class="status-dot"></span> In Progress</div>
+          </div>
+
+          <div class="learning-card">
+            <div class="learning-ring-wrapper">
+              <svg class="learning-ring" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                <circle class="ring-progress" cx="60" cy="60" r="52" data-progress="35" style="stroke: var(--neo-pink)"/>
+              </svg>
+              <div class="ring-label">35%</div>
+            </div>
+            <h4 class="learning-title">Next.js</h4>
+            <p class="learning-desc">React framework for production-ready apps</p>
+            <div class="learning-status"><span class="status-dot"></span> In Progress</div>
+          </div>
+
+          <div class="learning-card">
+            <div class="learning-ring-wrapper">
+              <svg class="learning-ring" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                <circle class="ring-progress" cx="60" cy="60" r="52" data-progress="50" style="stroke: var(--neo-green)"/>
+              </svg>
+              <div class="ring-label">50%</div>
+            </div>
+            <h4 class="learning-title">MongoDB</h4>
+            <p class="learning-desc">NoSQL database for modern applications</p>
+            <div class="learning-status"><span class="status-dot"></span> In Progress</div>
+          </div>
+
+          <div class="learning-card">
+            <div class="learning-ring-wrapper">
+              <svg class="learning-ring" viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                <circle class="ring-progress" cx="60" cy="60" r="52" data-progress="60" style="stroke: var(--neo-purple)"/>
+              </svg>
+              <div class="ring-label">60%</div>
+            </div>
+            <h4 class="learning-title">DSA Mastery</h4>
+            <p class="learning-desc">Algorithms & competitive programming</p>
+            <div class="learning-status"><span class="status-dot"></span> Ongoing</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- Projects -->
     <section id="projects" style="padding: 5rem 1.5rem">
       <div class="container">
@@ -1064,6 +1224,47 @@
       </div>
     </section>
 
+    <!-- Fun Facts Ticker -->
+    <div class="fun-facts-banner">
+      <div class="fun-facts-track">
+        <div class="fun-fact-item">
+          <span class="fun-fact-emoji">☕</span>
+          <span class="fun-fact-value" data-target="500">0</span><span class="fun-fact-suffix">+</span>
+          <span class="fun-fact-label">Cups of Coffee</span>
+        </div>
+        <div class="fun-fact-divider">⚡</div>
+        <div class="fun-fact-item">
+          <span class="fun-fact-emoji">🐛</span>
+          <span class="fun-fact-value" data-target="1000">0</span><span class="fun-fact-suffix">+</span>
+          <span class="fun-fact-label">Bugs Squashed</span>
+        </div>
+        <div class="fun-fact-divider">⚡</div>
+        <div class="fun-fact-item">
+          <span class="fun-fact-emoji">⌨️</span>
+          <span class="fun-fact-value" data-target="50">0</span><span class="fun-fact-suffix">K+</span>
+          <span class="fun-fact-label">Lines of Code</span>
+        </div>
+        <div class="fun-fact-divider">⚡</div>
+        <div class="fun-fact-item">
+          <span class="fun-fact-emoji">🎧</span>
+          <span class="fun-fact-value" data-target="300">0</span><span class="fun-fact-suffix">+</span>
+          <span class="fun-fact-label">Hours with Music</span>
+        </div>
+        <div class="fun-fact-divider">⚡</div>
+        <div class="fun-fact-item">
+          <span class="fun-fact-emoji">💡</span>
+          <span class="fun-fact-value" data-target="200">0</span><span class="fun-fact-suffix">+</span>
+          <span class="fun-fact-label">Stack Overflow Visits</span>
+        </div>
+        <div class="fun-fact-divider">⚡</div>
+        <div class="fun-fact-item">
+          <span class="fun-fact-emoji">🔥</span>
+          <span class="fun-fact-value" data-target="365">0</span><span class="fun-fact-suffix">+</span>
+          <span class="fun-fact-label">Days of Code</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Certifications -->
     <section
       id="certifications"
@@ -1185,6 +1386,46 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Activity Heatmap -->
+    <section id="activity" style="padding: 5rem 1.5rem;">
+      <div class="container">
+        <h2 class="section-header">
+          <span style="background: var(--neo-green); color: black">CODING ACTIVITY</span>
+        </h2>
+        <p class="section-subtitle">My coding streak over the past 6 months</p>
+        <div class="heatmap-wrapper">
+          <div class="heatmap-legend-top">
+            <span>Less</span>
+            <div class="heatmap-legend-cells">
+              <div class="heatmap-cell-demo" style="background: var(--heatmap-0)"></div>
+              <div class="heatmap-cell-demo" style="background: var(--heatmap-1)"></div>
+              <div class="heatmap-cell-demo" style="background: var(--heatmap-2)"></div>
+              <div class="heatmap-cell-demo" style="background: var(--heatmap-3)"></div>
+              <div class="heatmap-cell-demo" style="background: var(--heatmap-4)"></div>
+            </div>
+            <span>More</span>
+          </div>
+          <div class="heatmap-grid" id="heatmap-grid"></div>
+          <div class="heatmap-months" id="heatmap-months"></div>
+          <div class="heatmap-stats">
+            <div class="heatmap-stat">
+              <span class="heatmap-stat-value" id="heatmap-total">0</span>
+              <span class="heatmap-stat-label">Total Contributions</span>
+            </div>
+            <div class="heatmap-stat">
+              <span class="heatmap-stat-value" id="heatmap-streak">0</span>
+              <span class="heatmap-stat-label">Current Streak (days)</span>
+            </div>
+            <div class="heatmap-stat">
+              <span class="heatmap-stat-value" id="heatmap-best">0</span>
+              <span class="heatmap-stat-label">Best Day</span>
+            </div>
+          </div>
+        </div>
+        <div class="heatmap-tooltip" id="heatmap-tooltip"></div>
       </div>
     </section>
 
@@ -1331,7 +1572,7 @@
       </div>
       <div class="footer-bottom">
         <p>
-          © 2025 AJNISH KUMAR • All Rights Reserved • Built with ❤️ and Code
+          © 2026 AJNISH KUMAR • All Rights Reserved • Built with ❤️ and Code
         </p>
       </div>
     </footer>

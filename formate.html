@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Assignment Index</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    .index-card {
+      max-width: 1100px;
+      width: 100%;
+      padding: 3rem 3rem 2.5rem;
+      border: 1px solid #b0c4d4;
+    }
+
+    /* Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: #1a2b3c;
+      border-bottom: 4px solid #a3c0d4;
+      padding-bottom: 0.2rem;
+      display: inline-block;
+    }
+
+    .course-badge {
+      border: 1px solid #1e2b3c;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* Student Meta */
+    .student-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem 3rem;
+      margin: 1.8rem 0;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid #ccdde8;
+    }
+
+    .meta-field {
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      font-size: 1rem;
+    }
+
+    .meta-field span {
+      font-weight: 600;
+      color: #27435f;
+      white-space: nowrap;
+    }
+
+    .meta-underline {
+      border-bottom: 2px solid #b3c9db;
+      min-width: 160px;
+      height: 1.4rem;
+    }
+
+    /* Table */
+    .assignments-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0 2rem;
+    }
+
+    .assignments-table th {
+      border: 1px solid #1f2d3f;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.9rem 1.2rem;
+      text-align: center;
+      letter-spacing: 0.4px;
+    }
+
+    .assignments-table td {
+      padding: 1.1rem 1.2rem;
+      border: 1px solid #d0dde8;
+      font-size: 0.975rem;
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .assignments-table td:first-child {
+      font-weight: 700;
+      color: #1f3a57;
+      text-align: center;
+      width: 60px;
+    }
+
+    .assignments-table td:last-child {
+      text-align: center;
+      color: #2b4b6f;
+      font-weight: 500;
+      width: 105px;
+    }
+
+    .assignments-table td:nth-child(2) {
+      color: #152b3c;
+    }
+
+    .assignments-table td:last-child:empty::after {
+      content: "—";
+      opacity: 0.4;
+      font-weight: 300;
+    }
+
+    /* Signature Panel */
+    .signature-panel {
+      border: 1px solid #b0c4d4;
+      padding: 1.8rem 2.2rem;
+    }
+
+    .sig-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .sig-row:last-child { margin-bottom: 0; }
+
+    .sig-row b {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1f3b54;
+      min-width: 160px;
+    }
+
+    .sig-line {
+      border-bottom: 2px solid #7f9ab3;
+      flex: 1;
+      min-width: 220px;
+      height: 1.6rem;
+    }
+
+    .sig-line.wide { flex: 3; min-width: 280px; }
+
+    /* Footer */
+    .footer-note {
+      margin-top: 1.8rem;
+      font-size: 0.85rem;
+      color: #5a728a;
+      font-style: italic;
+      display: flex;
+      justify-content: flex-end;
+      border-top: 1px dashed #c0d2e0;
+      padding-top: 0.9rem;
+    }
+
+    /* Print button */
+    .print-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 0.7rem 1.6rem;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid #1f2d3f;
+      background: #fff;
+      color: #1f2d3f;
+      letter-spacing: 0.3px;
+      z-index: 999;
+    }
+
+    .print-btn:hover {
+      background: #1f2d3f;
+      color: #fff;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 15mm 15mm 15mm 15mm;
+      }
+
+      body {
+        display: block;
+        padding: 0;
+        margin: 0;
+        min-height: unset;
+      }
+
+      .print-btn { display: none; }
+
+      .index-card {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+        border: none;
+      }
+
+      .assignments-table th,
+      .assignments-table td {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="index-card">
+
+  <div class="page-header">
+    <h1>INDEX</h1>
+    <div class="course-badge">🐧 Linux Internals · Lab Assignments</div>
+  </div>
+
+  <div class="student-meta">
+    <div class="meta-field">
+      <span>Student Name</span>
+      <div class="meta-underline"></div>
+    </div>
+    <div class="meta-field">
+      <span>Roll No.</span>
+      <div class="meta-underline" style="min-width: 120px;"></div>
+    </div>
+    <div class="meta-field">
+      <span>Semester</span>
+      <div class="meta-underline" style="min-width: 100px;"></div>
+    </div>
+  </div>
+
+  <table class="assignments-table">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Questions</th>
+        <th>Page No.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Explain the Architecture of Linux (Kernel, Processes, Time Sharing, Shell, Files and Directories)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Explain Linux Editors and Basic Linux Commands (ED Editor, VI Editor, Redirection, Piping, Filters)</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>What is Shell Scripting? Explain Shell Variables, If Statement and Loops</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Explain AWK Programming including Patterns, Variables, Arrays and Strings</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Explain System Administration in Linux and System Calls with C Library Functions</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="signature-panel">
+    <div class="sig-row">
+      <b>Teacher's Signature:</b>
+      <div class="sig-line"></div>
+      <b style="min-width: 60px;">Date:</b>
+      <div class="sig-line" style="min-width: 130px; flex: 0 1 140px;"></div>
+    </div>
+    <div class="sig-row">
+      <b>Remarks:</b>
+      <div class="sig-line wide"></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Index page
+
+</div>
+
+
+<button class="print-btn" onclick="window.print()">🖨 Print</button>
+
+</body>
+</html>

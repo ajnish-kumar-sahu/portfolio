@@ -4001,3 +4001,638 @@ nav {
 nav {
   will-change: transform;
 }
+
+/* ============================================
+   JOURNEY TIMELINE SECTION
+   ============================================ */
+.journey-timeline {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2rem 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+.journey-timeline::-webkit-scrollbar {
+  height: 6px;
+}
+
+.journey-timeline::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.journey-timeline::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+.journey-track {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  min-width: max-content;
+  padding: 0 1rem;
+}
+
+.journey-line {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255,255,255,0.25);
+  z-index: 0;
+}
+
+.journey-milestone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  min-width: 180px;
+}
+
+.milestone-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2), 0 0 0 4px rgba(255,255,255,0.2);
+  margin-bottom: 1.25rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.journey-milestone:hover .milestone-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 0 6px rgba(255,255,255,0.3);
+}
+
+.milestone-card {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 6px 6px 0px 0px var(--shadow-color);
+  text-align: center;
+  max-width: 200px;
+  transition: all 0.3s ease;
+}
+
+.milestone-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 0px 0px var(--shadow-color);
+}
+
+.milestone-date {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 900;
+  font-size: 0.8rem;
+  background: var(--neo-yellow);
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  border: 2px solid var(--border-color);
+  margin-bottom: 0.75rem;
+  color: var(--neo-black);
+}
+
+.milestone-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--neo-blue), var(--neo-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.milestone-title {
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.milestone-desc {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* ============================================
+   CURRENTLY LEARNING SECTION
+   ============================================ */
+.learning-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.learning-card {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 6px 6px 0px 0px var(--shadow-color);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.learning-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.08) 55%, transparent 70%);
+  transform: skewX(-15deg);
+  transition: left 0.7s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.learning-card:hover::after {
+  left: 130%;
+}
+
+.learning-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 10px 10px 0px 0px var(--shadow-color), 0 0 30px rgba(59,130,246,0.15);
+}
+
+.learning-ring-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1.25rem;
+}
+
+.learning-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: rgba(200,200,200,0.2);
+  stroke-width: 8;
+}
+
+.ring-progress {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 326.73;
+  stroke-dashoffset: 326.73;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+
+.learning-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.learning-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.learning-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--neo-green);
+  background: rgba(51,255,87,0.1);
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  border: 2px solid var(--neo-green);
+}
+
+/* ============================================
+   FUN FACTS TICKER BANNER
+   ============================================ */
+.fun-facts-banner {
+  background: linear-gradient(135deg, var(--neo-purple) 0%, var(--neo-pink) 50%, var(--neo-orange) 100%);
+  padding: 2rem 0;
+  border-top: 4px solid var(--border-color);
+  border-bottom: 4px solid var(--border-color);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.fun-facts-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.fun-fact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 120px;
+}
+
+.fun-fact-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.fun-fact-value {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 2rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.fun-fact-suffix {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.8);
+}
+
+.fun-fact-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.fun-fact-divider {
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ============================================
+   ACTIVITY HEATMAP SECTION
+   ============================================ */
+:root {
+  --heatmap-0: #ebedf0;
+  --heatmap-1: #9be9a8;
+  --heatmap-2: #40c463;
+  --heatmap-3: #30a14e;
+  --heatmap-4: #216e39;
+}
+
+html.dark-mode {
+  --heatmap-0: #1e1e2e;
+  --heatmap-1: rgba(51,255,87,0.2);
+  --heatmap-2: rgba(51,255,87,0.4);
+  --heatmap-3: rgba(51,255,87,0.65);
+  --heatmap-4: rgba(51,255,87,0.9);
+}
+
+.heatmap-wrapper {
+  background: var(--card-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 6px 6px 0px 0px var(--shadow-color);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.heatmap-legend-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.heatmap-legend-cells {
+  display: flex;
+  gap: 3px;
+}
+
+.heatmap-cell-demo {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.heatmap-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  gap: 3px;
+  min-width: max-content;
+  margin-bottom: 0.75rem;
+}
+
+.heatmap-cell {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.heatmap-cell:hover {
+  border-color: var(--neo-blue);
+  transform: scale(1.3);
+  z-index: 5;
+  position: relative;
+}
+
+.heatmap-months {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 1.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.heatmap-month-label {
+  text-align: center;
+}
+
+.heatmap-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 2px dashed rgba(200,200,200,0.3);
+}
+
+.heatmap-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.heatmap-stat-value {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--neo-green), var(--neo-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+.heatmap-stat-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.heatmap-tooltip {
+  position: fixed;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  border: 2px solid #45475a;
+  white-space: nowrap;
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.3);
+}
+
+.heatmap-tooltip.visible {
+  opacity: 1;
+}
+
+/* ============================================
+   DARK MODE FOR NEW SECTIONS
+   ============================================ */
+html.dark-mode .milestone-card,
+html.dark-mode .learning-card {
+  background: #1e1e2e;
+  border-color: #45475a;
+}
+
+html.dark-mode .milestone-desc,
+html.dark-mode .learning-desc {
+  color: #a6adc8;
+}
+
+html.dark-mode .milestone-date {
+  border-color: #45475a;
+}
+
+html.dark-mode .ring-bg {
+  stroke: rgba(69,71,90,0.5);
+}
+
+html.dark-mode .heatmap-wrapper {
+  background: #1e1e2e;
+  border-color: #45475a;
+}
+
+/* ============================================
+   RESPONSIVE FOR NEW SECTIONS
+   ============================================ */
+@media (max-width: 767px) {
+  .journey-track {
+    gap: 1.25rem;
+  }
+
+  .journey-milestone {
+    min-width: 150px;
+  }
+
+  .milestone-card {
+    padding: 1rem;
+    max-width: 170px;
+  }
+
+  .learning-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .learning-card {
+    padding: 1.5rem;
+  }
+
+  .fun-facts-track {
+    gap: 1rem;
+  }
+
+  .fun-fact-item {
+    min-width: 90px;
+  }
+
+  .fun-fact-emoji {
+    font-size: 1.5rem;
+  }
+
+  .fun-fact-value {
+    font-size: 1.5rem;
+  }
+
+  .fun-fact-label {
+    font-size: 0.55rem;
+  }
+
+  .fun-fact-divider {
+    display: none;
+  }
+
+  .heatmap-cell {
+    width: 10px;
+    height: 10px;
+  }
+
+  .heatmap-stats {
+    gap: 1rem;
+  }
+
+  .heatmap-stat-value {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .learning-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* =========================================
+   PREMIUM SASS-LIKE ANIMATIONS & EFFECTS 
+   ========================================= */
+
+/* Glossy sweep on cards and buttons */
+.card, .project-card, .cert-card, .testimonial-card, .contact-card, .learning-card {
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow;
+}
+
+.card::after, .project-card::after, .cert-card::after, .testimonial-card::after, .contact-card::after, .learning-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.card:hover::after, .project-card:hover::after, .cert-card:hover::after, .testimonial-card:hover::after, .contact-card:hover::after, .learning-card:hover::after {
+  animation: shineSweep 1s forwards;
+}
+
+@keyframes shineSweep {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Floating Sway animation for tags/badges */
+@keyframes floatSway {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.course-tag, .tech-tag, .skill-tag {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.course-tag:hover, .tech-tag:hover, .skill-tag:hover {
+  animation: floatSway 1.5s ease-in-out infinite;
+  box-shadow: 5px 5px 0px 0px var(--shadow-color), 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  transform-origin: center bottom;
+}
+
+/* Enhanced 3D Soft Glow */
+.card:hover {
+  box-shadow: 0 0 30px rgba(255, 112, 166, 0.15), 10px 10px 0px 0px var(--shadow-color) !important;
+}
+
+.project-card:hover {
+  box-shadow: 0 0 35px rgba(59, 130, 246, 0.2), 12px 12px 0px 0px var(--shadow-color) !important;
+}
+
+.cert-card:hover {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), 8px 8px 0px 0px var(--shadow-color) !important;
+}
+
+/* Premium Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.dark-mode .noise-overlay {
+  opacity: 0.06;
+}
